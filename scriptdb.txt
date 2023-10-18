@@ -1,0 +1,58 @@
+CREATE TABLE `learndb1`.`functionality_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `learndb1`.`form_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `learndb1`.`permission_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `learndb1`.`usertype_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `learndb1`.`notification_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `learndb1`.`quiz_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  CREATE TABLE `learndb1`.`assignment_master` (
+  `id` INT NOT NULL,
+  `code` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `descripton` VARCHAR(45) NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`));

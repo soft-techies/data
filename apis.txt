@@ -1,0 +1,5 @@
+localhost:8001/users/loginuser                    //get all users details
+localhost:8001/users/saveregister                     //register user
+localhost:8001/users/register                        //get all register users/loginuser
+localhost:8001/users/login                        //for login 
+localhost:8001/users/assignRole                   //to assign role to user

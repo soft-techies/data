@@ -1,0 +1,123 @@
+CREATE DATABASE IF NOT EXISTS SHBOM;
+
+USE SHBOM;
+
+CREATE TABLE Manufacturer (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  contact_info VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Vendor (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  Address VARCHAR(255) NOT NULL,
+  Contact_info VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Components (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  Description VARCHAR(255) NOT NULL,
+  part_number VARCHAR(255) NOT NULL,
+  Version VARCHAR(255) NOT NULL,
+  Unit VARCHAR(255) NOT NULL,
+  Manufacturer_id INT NOT NULL,
+  FOREIGN KEY (Manufacturer_id) REFERENCES Manufacturer(id)
+);
+
+CREATE TABLE Device (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Quantity INT NOT NULL,
+  Function VARCHAR(255) NOT NULL,
+  Location VARCHAR(255) NOT NULL,
+  Device_type VARCHAR(255) NOT NULL,
+  Serial_number VARCHAR(255) NOT NULL,
+  Sku VARCHAR(255) NOT NULL,
+  Lot_number VARCHAR(255) NOT NULL,
+  prodTimestamp TIMESTAMP NOT NULL,
+  Mac_address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Assembly (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  version VARCHAR(255) NOT NULL,
+  part_number VARCHAR(255) NOT NULL,
+  device_id INT NOT NULL,
+  FOREIGN KEY (device_id) REFERENCES Device(id)
+);
+
+CREATE TABLE Purchase_Order (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  order_date DATE NOT NULL,
+  expected_delivery_date DATE NOT NULL,
+  Quantity INT NOT NULL,
+  Component_id INT NOT NULL,
+  vendor_id INT NOT NULL,
+  Remark VARCHAR(255),
+  FOREIGN KEY (vendor_id) REFERENCES Vendor(id)
+);
+
+CREATE TABLE Device_Certifications (
+  country_code VARCHAR(255) NOT NULL,
+  authority_name VARCHAR(255) NOT NULL,
+  authority_id VARCHAR(255) NOT NULL,
+  authority_url VARCHAR(255) NOT NULL,
+  device_id INT NOT NULL,
+  FOREIGN KEY (device_id) REFERENCES Device(id)
+);
+
+CREATE TABLE Final_BOM (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Name VARCHAR(255) NOT NULL,
+  Description VARCHAR(255) NOT NULL,
+  Initial_stock INT NOT NULL,
+  Current_stock INT NOT NULL,
+  vendor_name VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL,
+  cost FLOAT NOT NULL,
+  device_id INT NOT NULL,
+  FOREIGN KEY (device_id) REFERENCES Device(id)
+);
+
+CREATE TABLE BOM_Assembly (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Bom_id INT NOT NULL,
+  reference_designator VARCHAR(255) NOT NULL,
+  Quantity INT NOT NULL,
+  Assembly_id INT NOT NULL,
+  parent_assembly_id INT,
+  FOREIGN KEY (Assembly_id) REFERENCES Assembly(id),
+  FOREIGN KEY (Bom_id) REFERENCES Final_BOM(id)
+);
+
+
+CREATE TABLE BOM_Component (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Component_id INT NOT NULL,
+  reference_designator VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL,
+  assembly_id INT NOT NULL,
+  Bom_id INT NOT NULL,
+  FOREIGN KEY (Component_id) REFERENCES Components(id),
+  FOREIGN KEY (assembly_id) REFERENCES Assembly(id),
+  FOREIGN KEY (Bom_id) REFERENCES BOM_Assembly(id)
+);
+
+CREATE TABLE device_Bom (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  ebom VARCHAR(255) NOT NULL,
+  mbom VARCHAR(255) NOT NULL,
+  device_id INT NOT NULL,
+  device_cost FLOAT NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  bom_id INT NOT NULL,
+  FOREIGN KEY (device_id) REFERENCES Device(id),
+  FOREIGN KEY (bom_id) REFERENCES Final_BOM(id)
+);
+
+
+
