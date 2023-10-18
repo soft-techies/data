@@ -1,0 +1,26 @@
+Steps to shift code on machine:-
+
+Firstly make a zip file of the folder.
+
+then use gitbash on same location
+
+ run command -- scp docker-compose.yml  hexwave_node@104.198.155.142:/home/hexwave_node/
+
+
+here are =>
+scp : constant 
+docker-compose.yml : file name which you want to send
+hexwave_node: user-name
+104.198.155.142 : ip
+/home/hexwave_node/ : location [it will be better if you use home with user's directory location
+
+
+example:- scp report-service.zip alpha2@172.16.2.208:/home/alpha2
+ scp hexwave_fluentd_log_format-76915f717a75.zip administrator@192.168.200.52:/home/administrator
+
+
+
+then go to alpha2 and run ------unzip report-service.zip
+
+
+to see decending order ---- ls -ltra

@@ -1,0 +1,86 @@
+docker images -a
+
+
+docker rmi ImageiD
+
+
+sudo netstat -lpn |grep :8080
+
+kill -9 pid
+
+to check port:-
+ sudo lsof -i -P -n
+
+
+to build image:- sudo docker build -t (image name) .
+
+to remove all containers :- sudo docker rm -f $(sudo docker ps -q -a)
+
+sudo docker exec -it 21de73fec3c5 sh  ---------to go into containers folder
+ls -lh          ---to check file size
+
+/var/lib/docker/plugins/312f6f17477330dff20241c84f2b521c3a6776586cd52910fc45cfc3eabb0d32/rootfs/var/log/docker(containers logs files are in this location)
+
+mvn install
+mvn spring-boot:run
+
+
+docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+
+docker plugin ls
+
+https://thesmarthomejourney.com/2021/08/23/loki-grafana-log-aggregation/     ----it is for loki config file
+
+----------------used loki -driver convert in yaml to remove  ---------------------------
+       logging:
+      driver: loki
+      options:
+        loki-url: http://192.168.200.52:3100/loki/api/v1/push
+        loki-pipeline-stages: |
+          - regex:
+              expression: '(level|lvl|severity)=(?P<level>\w+)'
+          - drop:
+              expression: 'filename'
+          - labels:
+              level:
+        loki-relabel-config: |
+          - regex: filename|source
+            action: labeldrop
+---------------------------------------------------------------------------------------------
+{
+  "debug": true,
+  "log-driver": "loki",
+  "log-opts": {
+    "labels": "worker_id",
+    "loki-url": "http://10.10.0.2:3100/loki/api/v1/push",
+    "loki-external-labels": "job=docker",
+    "loki-relabel-config": "- regex: filename|source\n  action: labeldrop\n- regex: container_name\n  replacement: source\n  action: labelmap\n"
+  }
+}
+-----------------------------------------------------------------------------------------------
+https://cylab.be/blog/241/use-loki-to-monitor-the-logs-of-your-docker-compose-application    ----to volume mount with loki
+
+
+-----------------------------------------------------------------------
+https://www.tektutorialshub.com/angular-tutorial/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
