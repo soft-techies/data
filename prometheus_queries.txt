@@ -1,0 +1,37 @@
+Application up time query:--
+process_uptime_seconds{instance="172.16.2.208:9000",job="ml-output-simulator"}
+
+Application start time query:-
+process_start_time_seconds{instance="172.16.2.208:9000",job="ml-output-simulator"}
+
+
+Application logs(Rate of error or warning or info logs at certain period of time):-
+rate(logback_events_total{instance="172.16.2.208:9000",job="ml-output-simulator",level="trace"}[$__interval])
+
+Connections queries :-
+
+1) hikaricp_connections_active{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+2)hikaricp_connections_idle{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+3)hikaricp_connections_pending{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+
+Connection creation time:-
+hikaricp_connections_creation_seconds_sum{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"} / hikaricp_connections_creation_seconds_count{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+Connection usage time:-
+hikaricp_connections_usage_seconds_sum{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"} / hikaricp_connections_usage_seconds_count{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+
+Connection acquire time:-
+hikaricp_connections_acquire_seconds_sum{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"} / hikaricp_connections_acquire_seconds_count{instance="172.16.2.208:9000",job="ml-output-simulator",pool="HikariPool-1"}
+
+
+Requests Count:-
+rate(http_server_requests_seconds_count{instance="172.16.2.208:9000",job="ml-output-simulator",uri="/threat-config"}[$__interval])
+
+Response Time :-
+rate(http_server_requests_seconds_sum{instance="172.16.2.208:9000",job="ml-output-simulator",uri="/threat-config"}[5m]) / rate(http_server_requests_seconds_count{instance="172.16.2.208:9000",job="ml-output-simulator",uri="/threat-config"}[5m])
+
+
